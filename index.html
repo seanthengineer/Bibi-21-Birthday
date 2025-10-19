@@ -1,4 +1,168 @@
-<!DOCTYPE html>
+<!DOCTYPE <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, Bibi! 💕</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: linear-gradient(135deg, #FFD1DC, #FFE4E1);
+            color: #4a4a4a;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%23FF69B4" stroke="white" stroke-width="1"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, auto;
+        }
+        /* ... Your existing styles remain unchanged ... */
+    </style>
+</head>
+<body>
+
+    <div id="petal-container"></div>
+    <div id="petal-burst-container"></div>
+
+    <!-- Background Music & Voice Message -->
+    <audio id="background-music" loop>
+        <source src="https://raw.githubusercontent.com/seanthengineer/Bibi-21-Birthday/refs/heads/main/Seasons%20-%20Wave%20to%20Earth.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="voice-message">
+        <source src="path/to/your/voice.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="page-container">
+        <div id="page-wrapper">
+            <!-- PAGE 1: HOMEPAGE -->
+            <section class="page" id="page-1">
+                <div class="relative z-10 flex flex-col items-center">
+                    <h1 class="font-great-vibes happy-birthday-text">Happy</h1>
+                    <h1 class="font-great-vibes happy-birthday-text">Birthday</h1>
+                    <h2 class="font-great-vibes text-5xl md:text-7xl text-pink-500 mt-4" style="text-shadow: 0 2px 4px rgba(0,0,0,0.1);">To my Beautiful Special Bibi</h2>
+                    <button id="begin-btn" class="custom-btn mt-12">Click to Begin</button>
+                </div>
+            </section>
+
+            <!-- PAGE 2: MESSAGE -->
+            <section class="page" id="page-2" style="background: linear-gradient(135deg, #FFD1DC, #FFE4E1);">
+                 <button class="restart-btn">Start Over</button>
+                 <div class="w-full max-w-2xl bg-white/50 p-8 rounded-3xl shadow-lg backdrop-blur-md">
+                    <h3 class="font-great-vibes text-4xl text-pink-600 mb-4">A Message For You</h3>
+                    <button id="play-voice-btn" class="custom-btn mb-8">Play Voice Message</button>
+                    <button id="to-quiz-btn" class="custom-btn">Continue</button>
+                 </div>
+            </section>
+            
+            <!-- PAGE 3: QUIZ -->
+            <section class="page" id="page-3" style="background: linear-gradient(135deg, #FFD1DC, #FFE4E1);">
+                 <button class="restart-btn">Start Over</button>
+                 <div class="w-full max-w-2xl bg-white/50 p-8 rounded-3xl shadow-lg backdrop-blur-md">
+                    <div class="quiz-container">
+                        <label for="quiz-input" class="block mb-2 font-bold text-xl">What’s something you absolutely love about yourself?</label>
+                        <input type="text" id="quiz-input" class="quiz-input w-full p-3 rounded-xl text-center" placeholder="idk, I don't know, nothing, fat, etc is not allowed ma'am">
+                        <button id="submit-quiz-btn" class="custom-btn mt-4">I love this about me!</button>
+                        <p id="quiz-feedback" class="mt-4 text-pink-600 font-semibold h-6"></p>
+                    </div>
+                 </div>
+            </section>
+
+            <!-- PAGE 4: GALLERY -->
+            <section class="page" id="page-4" style="background: linear-gradient(135deg, #FFD1DC, #FFE4E1);">
+                 <button class="restart-btn">Start Over</button>
+                <div class="flex flex-col items-center w-full">
+                    <div id="gallery-prompt" class="text-center bg-white/50 p-8 rounded-3xl shadow-lg backdrop-blur-md max-w-xl">
+                        <h3 class="font-great-vibes text-5xl text-pink-600 mb-6">A little gallery of us...</h3>
+                        <button id="reveal-gallery-btn" class="custom-btn">Click to Open!</button>
+                    </div>
+                    <div id="gallery-wrapper" class="hidden flex-col items-center w-full">
+                        <h3 class="font-great-vibes text-5xl text-pink-600 mb-6">my fav pics of you hehehe</h3>
+                        <div class="gallery-container">
+                            <img src="https://i.imgur.com/K4UoUdj.jpeg" alt="Memory 1" style="height: 300px; border-radius: 15px; flex-shrink: 0;">
+                            <img src="https://i.imgur.com/PHwSDc2.jpeg" alt="New Image" style="height: 300px; border-radius: 15px; flex-shrink: 0;">
+                            <img src="https://i.imgur.com/v6m8KlZ.jpeg" alt="New Image" style="height: 300px; border-radius: 15px; flex-shrink: 0;">
+                        </div>
+                        <button id="next-to-final-btn" class="custom-btn mt-6">One Last Surprise...</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE 5: FINAL PAGE -->
+            <section class="page" id="page-5" style="background: linear-gradient(135deg, #FFD1DC, #FFE4E1);">
+                 <button class="restart-btn">Start Over</button>
+                 <div id="final-letter-container">
+                     <div id="envelope">
+                        <div id="envelope-back" class="envelope-part"></div>
+                        <div id="letter">
+                             <p class="font-great-vibes text-xl mb-2">My Love,</p>
+                            <p>
+                                There are 9,172 miles between us; a continent, oceans, and time. But none of that has ever deterred my love for you, because I’m obsessed <em>(as I should)</em>. I wish I were there to celebrate with you, because you deserve everything soft, beautiful, and perfect that life can give. You’re doing so well, mon amour, and I’m sooooo proud of you; the amazing, beautiful woman you are.
+                                <br><br>
+                                You should know that you are cherished beyond words, missed beyond measure, and loved beyond reason <em>(cause I'm crazy for you)</em>. So I don’t ever want to hear you saying anything remotely bad about my beautiful girl, you hear me? Good. Enjoy your day, Bebi.
+                                <br><br>
+                                <span class="font-great-vibes text-xl">Happy birthday, mon cœur.</span>
+                                <br>
+                                <span class="font-great-vibes text-xl">-Nigget</span>
+                            </p>
+                        </div>
+                        <div id="envelope-front" class="envelope-part"></div>
+                        <div id="envelope-flap" class="envelope-part"></div>
+                        <div id="envelope-seal"></div>
+                     </div>
+                 </div>
+            </section>
+
+        </div>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const pageWrapper = document.getElementById('page-wrapper');
+    const beginBtn = document.getElementById('begin-btn');
+
+    // --- SONGS ---
+    const songA = new Audio('https://raw.githubusercontent.com/seanthengineer/Bibi-21-Birthday/refs/heads/main/HAPPY%20BDAY.mp3');
+    const songB = new Audio('https://raw.githubusercontent.com/seanthengineer/Bibi-21-Birthday/refs/heads/main/Seasons%20-%20Wave%20to%20Earth.mp3');
+
+    songA.volume = 1;
+    songB.volume = 1;
+    songA.loop = true;
+    songB.loop = true;
+
+    songA.addEventListener('timeupdate', () => {
+        if (songA.currentTime >= 15) {
+            songA.currentTime = 0;
+            songA.play();
+        }
+    });
+
+    const playPromise = songA.play();
+    if (playPromise !== undefined) {
+        playPromise.catch(error => {
+            console.log("Autoplay blocked. Will play on interaction.");
+        });
+    }
+
+    beginBtn.addEventListener('click', () => {
+        songA.pause();
+        songB.currentTime = 0;
+        const playB = songB.play();
+        if (playB !== undefined) {
+            playB.catch(err => {
+                console.log("Song B playback failed.");
+            });
+        }
+    });
+
+    // --- YOUR EXISTING SCRIPT BELOW ---
+    // (all your page navigation, quiz, gallery, envelope code remains unchanged)
+});
+</script>
+
+</body>
+</html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
