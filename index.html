@@ -716,19 +716,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Button Event Listeners ---
-    beginBtn.addEventListener('click', () => {
-        const playPromise = bgMusic.play();
-        if (playPromise !== undefined) {
-            playPromise.catch(error => {
-                if (error.name === 'AbortError') {
-                    console.log('Music playback interrupted by user action. This is normal.');
-                } else {
-                    console.error("Audio play failed:", error);
-                }
-            });
-        }
-        goToPage(1);
-    });
+    let bgMusicStarted = false; // NEW: flag to prevent double play
+
+beginBtn.addEventListener('click', () => {
+    if (!bgMusicStarted) {
+        bgMusicStarted = true; // mark it as started
+        bgMusic.currentTime = 0; // start from beginning
+        bgMusic.play().catch(error => {
+            console.error("Audio play failed:", error);
+        });
+    }
+    goToPage(1);
+});
 
     playVoiceBtn.addEventListener('click', () => {
         const playPromise = voiceMessage.play();
