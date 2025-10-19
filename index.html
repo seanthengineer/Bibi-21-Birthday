@@ -1,4 +1,4 @@
-<!DOCTYPE <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -18,7 +18,58 @@
             color: #4a4a4a;
             cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%23FF69B4" stroke="white" stroke-width="1"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, auto;
         }
-        /* ... Your existing styles remain unchanged ... */
+
+        #page-1 {
+            background: 
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><path id="tulip-shape" d="M50,90 C70,70 75,45 75,35 C75,25 65,20 50,20 C35,20 25,25 25,35 C25,45 30,70 50,90Z" fill="none" stroke="%23f7dcdf" stroke-width="2"/></defs><use href="%23tulip-shape" x="-20" y="-10" transform="scale(0.3) rotate(15 50 50)"/><use href="%23tulip-shape" x="50" y="30" transform="scale(0.2) rotate(-20 50 50)"/><use href="%23tulip-shape" x="-5" y="60" transform="scale(0.25) rotate(5 50 50)"/><use href="%23tulip-shape" x="70" y="-10" transform="scale(0.28) rotate(-5 50 50)"/></svg>') repeat,
+                linear-gradient(135deg, #FFD1DC, #FFE4E1);
+            background-size: 150px, auto;
+            animation: backgroundPan 30s linear infinite;
+        }
+        
+        @keyframes backgroundPan {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
+        }
+
+        #page-container { width: 100vw; height: 100vh; overflow: hidden; position: relative; }
+        #page-wrapper { display: flex; width: 500vw; height: 100vh; transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1); }
+        .page { width: 100vw; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 2rem; box-sizing: border-box; position: relative; text-align: center; }
+
+        .font-great-vibes { font-family: 'Great Vibes', cursive; }
+
+        .happy-birthday-text { font-size: clamp(5rem, 18vw, 11rem); font-weight: normal; color: white; text-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); line-height: 1; animation: wiggle 3s ease-in-out infinite; }
+        @keyframes wiggle { 0%,100%{transform:rotate(0deg);} 25%{transform:rotate(-1deg);} 75%{transform:rotate(1deg);} }
+
+        .custom-btn { background-color: rgba(255,255,255,0.8); color: #ff69b4; padding: 1rem 2.5rem; border-radius: 9999px; font-weight: bold; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(255,105,180,0.3); transition: all 0.3s ease; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.9); cursor: pointer; }
+        .custom-btn:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 8px 20px rgba(255,105,180,0.5); }
+        .custom-btn:active { transform: translateY(-1px); }
+
+        .restart-btn { position: absolute; top: 2rem; left: 2rem; background-color: rgba(255,255,255,0.7); color: #ff69b4; padding: 0.5rem 1.5rem; border-radius: 9999px; font-weight: bold; font-size: 0.9rem; z-index: 20; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.8); backdrop-filter: blur(3px); cursor: pointer; }
+        .restart-btn:hover { transform: scale(1.05); box-shadow: 0 4px 10px rgba(255,105,180,0.3); }
+
+        .page-petal { position: absolute; top: -10%; background-size: contain; background-repeat: no-repeat; pointer-events: none; z-index: 10; animation: fall linear infinite; }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
+
+        .gallery-container { width: 100%; max-width: 800px; height: 60vh; overflow-y: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; padding: 1rem; }
+        .gallery-container img { width: 100%; height: 100%; object-fit: cover; border-radius: 1rem; transition: transform 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.1); opacity: 0; transform: scale(0); }
+        .gallery-container img:hover { transform: scale(1.05); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+        @keyframes burst-in { 0% {opacity:0; transform:scale(0.1) rotate(-20deg);} 70%{opacity:1; transform:scale(1.1) rotate(5deg);} 100%{opacity:1; transform:scale(1) rotate(0deg);} }
+
+        #final-letter-container { width: clamp(300px,80vw,700px); height: clamp(200px,60vh,450px); position: relative; perspective: 1000px; }
+        #envelope { position: absolute; width:100%; height:100%; cursor:pointer; transform-style: preserve-3d; transition: transform 0.8s ease-in-out; transform-origin: center center; }
+        #envelope.open { transform: translateY(-20px) rotateX(-5deg) rotateY(5deg); }
+        .envelope-part { position:absolute; width:100%; height:100%; background-color:#fce4ec; border-radius:5px; box-shadow:0 2px 10px rgba(0,0,0,0.1); }
+        #envelope-back { z-index:1; }
+        #envelope-flap { z-index:3; background: linear-gradient(#f8bbd0,#fce4ec); transform-origin:top; transition: transform 0.7s ease-in-out; clip-path: polygon(0 0, 100% 0, 50% 60%); }
+        #envelope.open #envelope-flap { transform: rotateX(180deg); z-index:0; }
+        #envelope-front { z-index:2; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+        #envelope-seal { position:absolute; top:45%; left:50%; transform:translate(-50%,-50%); width:30px; height:30px; background-color:#ff69b4; border-radius:50%; z-index:4; box-shadow:0 0 5px rgba(0,0,0,0.2); transition:opacity 0.3s; }
+        #envelope.open #envelope-seal { opacity:0; }
+        #letter { position:absolute; top:0; left:0; width:100%; height:100%; background:white; border-radius:5px; box-shadow:0 0 20px rgba(0,0,0,0.15); z-index:0; opacity:0; transform:translateY(0) scale(0.9); padding:1.5rem; box-sizing:border-box; text-align:left; color:#555; font-size:clamp(0.8rem,2.5vw,1.1rem); line-height:1.5; overflow-y:auto; }
+        #letter.visible { animation: floatForward 1.5s forwards ease-out; }
+        #letter em { font-style: italic; color: #e91e63; }
+        @keyframes floatForward { from{opacity:0;transform:translateY(0) scale(0.9) rotateX(0deg); z-index:0;} 50%{opacity:1;transform:translateY(0) scale(1.02) rotateX(2deg); z-index:10;} 100%{opacity:1; transform:translateY(0) scale(1) rotateX(0deg); z-index:10;} }
     </style>
 </head>
 <body>
@@ -26,16 +77,15 @@
     <div id="petal-container"></div>
     <div id="petal-burst-container"></div>
 
-    <!-- Background Music & Voice Message -->
+    <!-- Song B -->
     <audio id="background-music" loop>
         <source src="https://raw.githubusercontent.com/seanthengineer/Bibi-21-Birthday/refs/heads/main/Seasons%20-%20Wave%20to%20Earth.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="voice-message">
-        <source src="path/to/your/voice.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
     </audio>
 
     <div id="page-container">
         <div id="page-wrapper">
+
             <!-- PAGE 1: HOMEPAGE -->
             <section class="page" id="page-1">
                 <div class="relative z-10 flex flex-col items-center">
@@ -46,770 +96,53 @@
                 </div>
             </section>
 
-            <!-- PAGE 2: MESSAGE -->
+            <!-- PAGE 2: QUIZ -->
             <section class="page" id="page-2" style="background: linear-gradient(135deg, #FFD1DC, #FFE4E1);">
                  <button class="restart-btn">Start Over</button>
                  <div class="w-full max-w-2xl bg-white/50 p-8 rounded-3xl shadow-lg backdrop-blur-md">
-                    <h3 class="font-great-vibes text-4xl text-pink-600 mb-4">A Message For You</h3>
-                    <button id="play-voice-btn" class="custom-btn mb-8">Play Voice Message</button>
-                    <button id="to-quiz-btn" class="custom-btn">Continue</button>
-                 </div>
-            </section>
-            
-            <!-- PAGE 3: QUIZ -->
-            <section class="page" id="page-3" style="background: linear-gradient(135deg, #FFD1DC, #FFE4E1);">
-                 <button class="restart-btn">Start Over</button>
-                 <div class="w-full max-w-2xl bg-white/50 p-8 rounded-3xl shadow-lg backdrop-blur-md">
                     <div class="quiz-container">
                         <label for="quiz-input" class="block mb-2 font-bold text-xl">What’s something you absolutely love about yourself?</label>
                         <input type="text" id="quiz-input" class="quiz-input w-full p-3 rounded-xl text-center" placeholder="idk, I don't know, nothing, fat, etc is not allowed ma'am">
-                        <button id="submit-quiz-btn" class="custom-btn mt-4">I love this about me!</button>
-                        <p id="quiz-feedback" class="mt-4 text-pink-600 font-semibold h-6"></p>
+                        <button id="submit-quiz-btn" class="custom-btn mt-4">Submit</button>
+                        <div id="quiz-result" class="mt-4 text-lg font-semibold text-pink-600"></div>
                     </div>
-                 </div>
-            </section>
-
-            <!-- PAGE 4: GALLERY -->
-            <section class="page" id="page-4" style="background: linear-gradient(135deg, #FFD1DC, #FFE4E1);">
-                 <button class="restart-btn">Start Over</button>
-                <div class="flex flex-col items-center w-full">
-                    <div id="gallery-prompt" class="text-center bg-white/50 p-8 rounded-3xl shadow-lg backdrop-blur-md max-w-xl">
-                        <h3 class="font-great-vibes text-5xl text-pink-600 mb-6">A little gallery of us...</h3>
-                        <button id="reveal-gallery-btn" class="custom-btn">Click to Open!</button>
-                    </div>
-                    <div id="gallery-wrapper" class="hidden flex-col items-center w-full">
-                        <h3 class="font-great-vibes text-5xl text-pink-600 mb-6">my fav pics of you hehehe</h3>
-                        <div class="gallery-container">
-                            <img src="https://i.imgur.com/K4UoUdj.jpeg" alt="Memory 1" style="height: 300px; border-radius: 15px; flex-shrink: 0;">
-                            <img src="https://i.imgur.com/PHwSDc2.jpeg" alt="New Image" style="height: 300px; border-radius: 15px; flex-shrink: 0;">
-                            <img src="https://i.imgur.com/v6m8KlZ.jpeg" alt="New Image" style="height: 300px; border-radius: 15px; flex-shrink: 0;">
-                        </div>
-                        <button id="next-to-final-btn" class="custom-btn mt-6">One Last Surprise...</button>
-                    </div>
-                </div>
-            </section>
-
-            <!-- PAGE 5: FINAL PAGE -->
-            <section class="page" id="page-5" style="background: linear-gradient(135deg, #FFD1DC, #FFE4E1);">
-                 <button class="restart-btn">Start Over</button>
-                 <div id="final-letter-container">
-                     <div id="envelope">
-                        <div id="envelope-back" class="envelope-part"></div>
-                        <div id="letter">
-                             <p class="font-great-vibes text-xl mb-2">My Love,</p>
-                            <p>
-                                There are 9,172 miles between us; a continent, oceans, and time. But none of that has ever deterred my love for you, because I’m obsessed <em>(as I should)</em>. I wish I were there to celebrate with you, because you deserve everything soft, beautiful, and perfect that life can give. You’re doing so well, mon amour, and I’m sooooo proud of you; the amazing, beautiful woman you are.
-                                <br><br>
-                                You should know that you are cherished beyond words, missed beyond measure, and loved beyond reason <em>(cause I'm crazy for you)</em>. So I don’t ever want to hear you saying anything remotely bad about my beautiful girl, you hear me? Good. Enjoy your day, Bebi.
-                                <br><br>
-                                <span class="font-great-vibes text-xl">Happy birthday, mon cœur.</span>
-                                <br>
-                                <span class="font-great-vibes text-xl">-Nigget</span>
-                            </p>
-                        </div>
-                        <div id="envelope-front" class="envelope-part"></div>
-                        <div id="envelope-flap" class="envelope-part"></div>
-                        <div id="envelope-seal"></div>
-                     </div>
                  </div>
             </section>
 
         </div>
     </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const pageWrapper = document.getElementById('page-wrapper');
-    const beginBtn = document.getElementById('begin-btn');
+    <script>
+        const pageWrapper = document.getElementById('page-wrapper');
+        const beginBtn = document.getElementById('begin-btn');
+        const bgMusic = document.getElementById('background-music');
 
-    // --- SONGS ---
-    const songA = new Audio('https://raw.githubusercontent.com/seanthengineer/Bibi-21-Birthday/refs/heads/main/HAPPY%20BDAY.mp3');
-    const songB = new Audio('https://raw.githubusercontent.com/seanthengineer/Bibi-21-Birthday/refs/heads/main/Seasons%20-%20Wave%20to%20Earth.mp3');
+        let currentPage = 0;
 
-    songA.volume = 1;
-    songB.volume = 1;
-    songA.loop = true;
-    songB.loop = true;
-
-    songA.addEventListener('timeupdate', () => {
-        if (songA.currentTime >= 15) {
-            songA.currentTime = 0;
-            songA.play();
-        }
-    });
-
-    const playPromise = songA.play();
-    if (playPromise !== undefined) {
-        playPromise.catch(error => {
-            console.log("Autoplay blocked. Will play on interaction.");
-        });
-    }
-
-    beginBtn.addEventListener('click', () => {
-        songA.pause();
-        songB.currentTime = 0;
-        const playB = songB.play();
-        if (playB !== undefined) {
-            playB.catch(err => {
-                console.log("Song B playback failed.");
-            });
-        }
-    });
-
-    // --- YOUR EXISTING SCRIPT BELOW ---
-    // (all your page navigation, quiz, gallery, envelope code remains unchanged)
-});
-</script>
-
-</body>
-</html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday, Bibi! 💕</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Times New Roman', Times, serif;
-            margin: 0;
-            padding: 0;
-            overflow: hidden; /* Prevents scrollbars from page transitions */
-            background: linear-gradient(135deg, #FFD1DC, #FFE4E1); /* Default gradient */
-            color: #4a4a4a;
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%23FF69B4" stroke="white" stroke-width="1"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, auto; /* Custom heart cursor */
+        function goToPage(pageNumber) {
+            currentPage = pageNumber;
+            pageWrapper.style.transform = `translateX(-${pageNumber * 100}vw)`;
         }
 
-        /* Homepage specific background with tulips */
-        #page-1 {
-            background: 
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><path id="tulip-shape" d="M50,90 C70,70 75,45 75,35 C75,25 65,20 50,20 C35,20 25,25 25,35 C25,45 30,70 50,90Z" fill="none" stroke="%23f7dcdf" stroke-width="2"/></defs><use href="%23tulip-shape" x="-20" y="-10" transform="scale(0.3) rotate(15 50 50)"/><use href="%23tulip-shape" x="50" y="30" transform="scale(0.2) rotate(-20 50 50)"/><use href="%23tulip-shape" x="-5" y="60" transform="scale(0.25) rotate(5 50 50)"/><use href="%23tulip-shape" x="70" y="-10" transform="scale(0.28) rotate(-5 50 50)"/></svg>') repeat,
-                linear-gradient(135deg, #FFD1DC, #FFE4E1);
-            background-size: 150px, auto; /* Adjust tulip pattern size */
-            animation: backgroundPan 30s linear infinite; /* Gentle movement for the pattern */
-        }
-        
-        @keyframes backgroundPan {
-            0% { background-position: 0% 0%; }
-            100% { background-position: 100% 100%; }
-        }
-
-        #page-container {
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-            position: relative;
-        }
-
-        #page-wrapper {
-            display: flex;
-            width: 500vw; /* Updated for 5 pages */
-            height: 100vh;
-            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
-        }
-
-        .page {
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-            box-sizing: border-box;
-            position: relative;
-            text-align: center;
-        }
-        
-        /* Font Styles */
-        .font-great-vibes { font-family: 'Great Vibes', cursive; }
-
-        /* Simple Happy Birthday Text */
-        .happy-birthday-text {
-            font-size: clamp(5rem, 18vw, 11rem);
-            font-weight: normal;
-            color: white;
-            text-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            line-height: 1;
-            animation: wiggle 3s ease-in-out infinite;
-        }
-
-        /* Subtle Wiggle Animation */
-        @keyframes wiggle {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(-1deg); }
-            75% { transform: rotate(1deg); }
-        }
-
-        /* Custom Button */
-        .custom-btn {
-            background-color: rgba(255, 255, 255, 0.8);
-            color: #ff69b4;
-            padding: 1rem 2.5rem;
-            border-radius: 9999px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.9);
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%23e74c3c" stroke="white" stroke-width="1.5"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer; /* Hand cursor with a small heart on hover */
-        }
-        .custom-btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.5);
-        }
-        .custom-btn:active {
-            transform: translateY(-1px);
-        }
-
-        /* Restart Button */
-        .restart-btn {
-            position: absolute;
-            top: 2rem;
-            left: 2rem;
-            background-color: rgba(255, 255, 255, 0.7);
-            color: #ff69b4;
-            padding: 0.5rem 1.5rem;
-            border-radius: 9999px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            z-index: 20;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(3px);
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%23e74c3c" stroke="white" stroke-width="1.5"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer; /* Hand cursor with a small heart on hover */
-        }
-        .restart-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 10px rgba(255, 105, 180, 0.3);
-        }
-
-        /* Falling Petals (tulips on other pages) */
-        .page-petal {
-            position: absolute;
-            top: -10%;
-            background-size: contain;
-            background-repeat: no-repeat;
-            pointer-events: none;
-            z-index: 10;
-            animation: fall linear infinite;
-        }
-        @keyframes fall {
-            to {
-                transform: translateY(110vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-        
-        /* Floating Monkeys */
-        .monkey {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            pointer-events: none;
-            z-index: 5;
-            animation: float 10s ease-in-out infinite;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
-            25% { transform: translateY(-20px) translateX(15px) rotate(5deg); }
-            50% { transform: translateY(10px) translateX(-10px) rotate(-5deg); }
-            75% { transform: translateY(-15px) translateX(20px) rotate(3deg); }
-        }
-        
-        /* Quiz Input */
-        .quiz-input {
-            border: 2px solid #ff99c4;
-            background-color: rgba(255, 255, 255, 0.8);
-            transition: all 0.3s ease;
-        }
-        .quiz-input:focus {
-            box-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
-            border-color: #ff69b4;
-            outline: none;
-        }
-        
-        /* Gallery */
-        .gallery-container {
-            width: 100%;
-            max-width: 800px;
-            height: 60vh;
-            overflow-y: auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1rem;
-            padding: 1rem;
-        }
-        .gallery-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 1rem;
-            transition: transform 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Subtle shadow for floating effect */
-        }
-        .gallery-container img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        }
-        
-        .gallery-wrapper.hidden {
-            display: none;
-        }
-
-        .gallery-container img {
-            opacity: 0;
-            transform: scale(0);
-        }
-
-        @keyframes burst-in {
-            0% {
-                opacity: 0;
-                transform: scale(0.1) rotate(-20deg);
-            }
-            70% {
-                opacity: 1;
-                transform: scale(1.1) rotate(5deg);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1) rotate(0deg);
-            }
-        }
-
-        /* Petal Burst Animation Container */
-        #petal-burst-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 9999;
-            overflow: hidden;
-        }
-
-        /* --- FINAL PAGE: ENVELOPE STYLES --- */
-        #final-letter-container {
-            width: clamp(300px, 80vw, 700px); /* Increased width */
-            height: clamp(200px, 60vh, 450px); /* Increased height */
-            position: relative;
-            perspective: 1000px;
-        }
-        #envelope {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            cursor: pointer;
-            transform-style: preserve-3d;
-            transition: transform 0.8s ease-in-out; /* Slower, smoother transition */
-            transform-origin: center center;
-            
-        }
-        #envelope.open {
-            transform: translateY(-20px) rotateX(-5deg) rotateY(5deg); /* Opens and slightly tilts */
-        }
-        .envelope-part {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-color: #fce4ec; /* Light pink */
-            border-radius: 5px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        #envelope-back {
-            z-index: 1;
-        }
-        #envelope-flap {
-            z-index: 3;
-            background: linear-gradient(#f8bbd0, #fce4ec);
-            transform-origin: top;
-            transition: transform 0.7s ease-in-out;
-            clip-path: polygon(0 0, 100% 0, 50% 60%);
-        }
-        #envelope.open #envelope-flap {
-            transform: rotateX(180deg);
-            z-index: 0;
-        }
-        #envelope-front {
-            z-index: 2;
-             clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-        }
-        #envelope-seal {
-            position: absolute;
-            top: 45%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 30px;
-            height: 30px;
-            background-color: #ff69b4;
-            border-radius: 50%;
-            z-index: 4;
-            box-shadow: 0 0 5px rgba(0,0,0,0.2);
-            transition: opacity 0.3s;
-        }
-        #envelope.open #envelope-seal {
-            opacity: 0;
-        }
-        #letter {
-            position: absolute;
-            top: 0;
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            background: white;
-            border-radius: 5px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.15);
-            z-index: 0; /* Initial z-index, will change on animation */
-            opacity: 0;
-            transform: translateY(0) scale(0.9); /* Start slightly smaller and behind */
-            padding: 1.5rem; 
-            box-sizing: border-box;
-            text-align: left;
-            color: #555;
-            font-size: clamp(0.8rem, 2.5vw, 1.1rem); /* Slightly increased font size */
-            line-height: 1.5;
-            overflow-y: auto; 
-        }
-        #letter.visible {
-            animation: floatForward 1.5s forwards ease-out; /* Removed delay from here */
-        }
-        #letter em {
-            font-style: italic;
-            color: #e91e63;
-        }
-        @keyframes floatForward {
-            from {
-                opacity: 0;
-                transform: translateY(0) scale(0.9) rotateX(0deg);
-                z-index: 0;
-            }
-            50% {
-                opacity: 1;
-                transform: translateY(0) scale(1.02) rotateX(2deg);
-                z-index: 10;
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0) scale(1) rotateX(0deg);
-                z-index: 10;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <div id="petal-container"></div>
-    <div id="petal-burst-container"></div>
-
-    <!-- Background Music --><!-- IMPORTANT: Replace "path/to/your/music.mp3" with the actual path or URL to your song --><audio id="background-music" loop>
-        <source src="https://cdns-preview-e.dzcdn.net/stream/c-e9b422a7f551e716503c80d8cf4b5f47-8.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-
-    <!-- Voice Message --><!-- IMPORTANT: Replace "path/to/your/voice.mp3" with the actual path or URL to your voice message --><audio id="voice-message">
-        <source src="path/to/your/voice.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-
-    <div id="page-container">
-        <div id="page-wrapper">
-
-            <!-- PAGE 1: HOMEPAGE (Reverted) --><section class="page" id="page-1">
-                <div class="relative z-10 flex flex-col items-center">
-                    <h1 class="font-great-vibes happy-birthday-text">Happy</h1>
-                    <h1 class="font-great-vibes happy-birthday-text">Birthday</h1>
-                    <h2 class="font-great-vibes text-5xl md:text-7xl text-pink-500 mt-4" style="text-shadow: 0 2px 4px rgba(0,0,0,0.1);">To my Beautiful Special Bibi</h2>
-                    <button id="begin-btn" class="custom-btn mt-12">Click to Begin</button>
-                </div>
-            </section>
-
-            <!-- PAGE 2: MESSAGE --><section class="page" id="page-2" style="background: linear-gradient(135deg, #FFD1DC, #FFE4E1);">
-                 <button class="restart-btn">Start Over</button>
-                 <div class="w-full max-w-2xl bg-white/50 p-8 rounded-3xl shadow-lg backdrop-blur-md">
-                    <h3 class="font-great-vibes text-4xl text-pink-600 mb-4">A Message For You</h3>
-                    <button id="play-voice-btn" class="custom-btn mb-8">Play Voice Message</button>
-                    <button id="to-quiz-btn" class="custom-btn">Continue</button>
-                 </div>
-            </section>
-            
-            <!-- PAGE 3: QUIZ --><section class="page" id="page-3" style="background: linear-gradient(135deg, #FFD1DC, #FFE4E1);">
-                 <button class="restart-btn">Start Over</button>
-                 <div class="w-full max-w-2xl bg-white/50 p-8 rounded-3xl shadow-lg backdrop-blur-md">
-                    <div class="quiz-container">
-                        <label for="quiz-input" class="block mb-2 font-bold text-xl">What’s something you absolutely love about yourself?</label>
-                        <input type="text" id="quiz-input" class="quiz-input w-full p-3 rounded-xl text-center" placeholder="idk, I don't know, nothing, fat, etc is not allowed ma'am">
-                        <button id="submit-quiz-btn" class="custom-btn mt-4">I love this about me!</button>
-                        <p id="quiz-feedback" class="mt-4 text-pink-600 font-semibold h-6"></p>
-                    </div>
-                 </div>
-            </section>
-
-            <!-- PAGE 4: GALLERY --><section class="page" id="page-4" style="background: linear-gradient(135deg, #FFD1DC, #FFE4E1);">
-                 <button class="restart-btn">Start Over</button>
-                <div class="flex flex-col items-center w-full">
-                    <div id="gallery-prompt" class="text-center bg-white/50 p-8 rounded-3xl shadow-lg backdrop-blur-md max-w-xl"> <!-- Added background to prompt --><h3 class="font-great-vibes text-5xl text-pink-600 mb-6">A little gallery of us...</h3>
-                        <button id="reveal-gallery-btn" class="custom-btn">Click to Open!</button>
-                    </div>
-
-                    <div id="gallery-wrapper" class="hidden flex-col items-center w-full">
-                        <h3 class="font-great-vibes text-5xl text-pink-600 mb-6">my fav pics of you hehehe</h3>
-                        <div class="gallery-container">
-                            <!-- IMPORTANT: Replace these placeholders with your image URLs --><img src="https://i.imgur.com/K4UoUdj.jpeg" alt="Memory 1" style="height: 300px; border-radius: 15px; flex-shrink: 0;">
-                            <img src="https://i.imgur.com/PHwSDc2.jpeg" alt="New Image" style="height: 300px; border-radius: 15px; flex-shrink: 0;">
-                            <img src="https://i.imgur.com/v6m8KlZ.jpeg" alt="New Image" style="height: 300px; border-radius: 15px; flex-shrink: 0;">
-                        </div>
-                        <button id="next-to-final-btn" class="custom-btn mt-6">One Last Surprise...</button>
-                    </div>
-                </div>
-            </section>
-
-            <!-- PAGE 5: FINAL PAGE --><section class="page" id="page-5" style="background: linear-gradient(135deg, #FFD1DC, #FFE4E1);">
-                 <button class="restart-btn">Start Over</button>
-                 <div id="final-letter-container">
-                     <div id="envelope">
-                        <div id="envelope-back" class="envelope-part"></div>
-                        <div id="letter">
-                             <p class="font-great-vibes text-xl mb-2">My Love,</p>
-                            <p>
-                                There are 9,172 miles between us; a continent, oceans, and time. But none of that has ever deterred my love for you, because I’m obsessed <em>(as I should)</em>. I wish I were there to celebrate with you, because you deserve everything soft, beautiful, and perfect that life can give. You’re doing so well, mon amour, and I’m sooooo proud of you; the amazing, beautiful woman you are.
-                                <br><br>
-                                You should know that you are cherished beyond words, missed beyond measure, and loved beyond reason <em>(cause I'm crazy for you)</em>. So I don’t ever want to hear you saying anything remotely bad about my beautiful girl, you hear me? Good. Enjoy your day, Bebi.
-                                <br><br>
-                                <span class="font-great-vibes text-xl">Happy birthday, mon cœur.</span>
-                                <br>
-                                <span class="font-great-vibes text-xl">-Nigget</span>
-                            </p>
-                        </div>
-                        <div id="envelope-front" class="envelope-part"></div>
-                        <div id="envelope-flap" class="envelope-part"></div>
-                        <div id="envelope-seal"></div>
-                     </div>
-                 </div>
-            </section>
-
-        </div>
-    </div>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const pageWrapper = document.getElementById('page-wrapper');
-    const beginBtn = document.getElementById('begin-btn');
-    const playVoiceBtn = document.getElementById('play-voice-btn');
-    const toQuizBtn = document.getElementById('to-quiz-btn');
-    const submitQuizBtn = document.getElementById('submit-quiz-btn');
-    const nextToFinalBtn = document.getElementById('next-to-final-btn');
-    const revealGalleryBtn = document.getElementById('reveal-gallery-btn');
-    const restartBtns = document.querySelectorAll('.restart-btn');
-    
-    const galleryPrompt = document.getElementById('gallery-prompt');
-    const galleryWrapper = document.getElementById('gallery-wrapper');
-    const galleryContainer = document.querySelector('.gallery-container');
-    
-    const bgMusic = document.getElementById('background-music');
-    const voiceMessage = document.getElementById('voice-message');
-    
-    const quizInput = document.getElementById('quiz-input');
-    const quizFeedback = document.getElementById('quiz-feedback');
-
-    // Final page elements
-    const envelope = document.getElementById('envelope');
-    const letter = document.getElementById('letter');
-    let isLetterOpened = false;
-
-    let currentPage = 0;
-    const totalPages = 5; 
-
-    function resetFinalPageAnimation() {
-        envelope.classList.remove('open');
-        envelope.style.transform = ''; /* Reset transform for envelope */
-        letter.classList.remove('visible');
-        letter.style.opacity = '0';
-        letter.style.transform = 'translateY(0) scale(0.9)'; /* Reset transform for letter */
-        letter.style.zIndex = '0'; /* Reset z-index */
-        isLetterOpened = false;
-    }
-
-    function goToPage(pageIndex) {
-        if (pageIndex >= 0 && pageIndex < totalPages) {
-            pageWrapper.style.transform = `translateX(-${pageIndex * 100}vw)`;
-            currentPage = pageIndex;
-             // Ensure gallery is reset if navigating back to prompt
-            if (pageIndex !== 3) {
-                galleryWrapper.classList.add('hidden');
-                galleryWrapper.classList.remove('flex');
-                galleryPrompt.style.display = 'block';
-                // Reset image opacities for re-animation
-                galleryContainer.querySelectorAll('img').forEach(img => {
-                    img.style.animation = 'none';
-                    img.style.opacity = '0';
-                    img.style.transform = 'scale(0)';
-                });
-            }
-            if (pageIndex !== 4) {
-                resetFinalPageAnimation();
-            }
-        }
-    }
-
-    // --- Falling Petals (tulips on all pages except homepage) ---
-    const tulipPetalSVG = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 70"><path d="M25,70 C45,50 50,25 50,15 C50,5 40,0 25,0 C10,0 0,5 0,15 C0,25 5,50 25,70Z" fill="%23FFB6C1"/></svg>`;
-    const petalContainer = document.getElementById('petal-container');
-    const PETAL_COUNT = 60; // Increased petal count
-
-    for (let i = 0; i < PETAL_COUNT; i++) {
-        const petal = document.createElement('div');
-        petal.classList.add('page-petal'); // Changed class for differentiation
-        const size = Math.random() * 30 + 20; // 20px to 50px
-        petal.style.width = `${size}px`;
-        petal.style.height = `${size * 1.4}px`; // Maintain aspect ratio
-        petal.style.left = `${Math.random() * 100}vw`;
-        petal.style.animationDuration = `${Math.random() * 5 + 5}s`; // 5 to 10 seconds
-        petal.style.animationDelay = `${Math.random() * 5}s`;
-        petal.style.opacity = Math.random() * 0.5 + 0.5;
-        petal.style.backgroundImage = `url('${tulipPetalSVG}')`;
-        petal.style.transform = `rotate(${Math.random() * 360}deg)`;
-        petalContainer.appendChild(petal);
-    }
-    
-    // --- Petal Burst Function (for quiz success) ---
-    function createPetalBurst() {
-        const burstContainer = document.getElementById('petal-burst-container');
-        const BURST_COUNT = 50;
-        const centerX = window.innerWidth / 2;
-        const centerY = window.innerHeight / 2;
-
-        for (let i = 0; i < BURST_COUNT; i++) {
-            const burstPetal = document.createElement('div');
-            burstPetal.style.position = 'absolute';
-            burstPetal.style.left = `${centerX}px`;
-            burstPetal.style.top = `${centerY}px`;
-            const size = Math.random() * 25 + 15;
-            burstPetal.style.width = `${size}px`;
-            burstPetal.style.height = `${size * 1.4}px`;
-            burstPetal.style.backgroundImage = `url('${tulipPetalSVG}')`; // Use tulip SVG for burst
-            burstPetal.style.backgroundRepeat = 'no-repeat';
-            burstPetal.style.backgroundSize = 'contain';
-            
-            const angle = Math.random() * 360;
-            const radius = Math.random() * 200 + 100;
-            const translateX = Math.cos(angle * Math.PI / 180) * radius;
-            const translateY = Math.sin(angle * Math.PI / 180) * radius;
-            const rotate = Math.random() * 720 - 360;
-
-            burstPetal.animate([
-                { transform: 'translate(-50%, -50%) scale(1)', opacity: 1 },
-                { transform: `translate(-50%, -50%) translate(${translateX}px, ${translateY}px) scale(0) rotate(${rotate}deg)`, opacity: 0 }
-            ], {
-                duration: 1500,
-                easing: 'cubic-bezier(0.1, 0.9, 0.2, 1)',
-                fill: 'forwards'
-            });
-            
-            burstContainer.appendChild(burstPetal);
-            setTimeout(() => burstPetal.remove(), 1600);
-        }
-    }
-
-    // --- Button Event Listeners ---
-    beginBtn.addEventListener('click', () => {
-        const playPromise = bgMusic.play();
-        if (playPromise !== undefined) {
-            playPromise.catch(error => {
-                if (error.name === 'AbortError') {
-                    console.log('Music playback interrupted by user action. This is normal.');
-                } else {
-                    console.error("Audio play failed:", error);
+        // Landing page button click
+        beginBtn.addEventListener('click', () => {
+            // Start Song B
+            if (bgMusic.paused) {
+                const playPromise = bgMusic.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.error("Audio play failed:", error);
+                    });
                 }
-            });
-        }
-        goToPage(1);
-    });
-
-    playVoiceBtn.addEventListener('click', () => {
-        const playPromise = voiceMessage.play();
-        if (playPromise !== undefined) {
-            playPromise.catch(error => {
-                if (error.name === 'AbortError') {
-                    console.log('Voice message playback interrupted by user action.');
-                } else {
-                    console.error("Voice message play failed:", error);
-                    alert("Could not play voice message. Make sure the file path is correct!");
-                }
-            });
-        }
-    });
-
-    toQuizBtn.addEventListener('click', () => {
-        goToPage(2);
-    });
-
-    submitQuizBtn.addEventListener('click', () => {
-        const answer = quizInput.value.trim().toLowerCase();
-        const forbiddenWords = ["idk", "nothing", "none", "n/a", "i don't know", "fat"]; // Added "fat"
-
-        if (answer === "" || forbiddenWords.some(word => answer.includes(word))) {
-            quizFeedback.textContent = "Babe, try harder, I knew you'd say that";
-            quizInput.style.borderColor = 'red';
-        } else {
-            quizFeedback.textContent = "That’s amazing! I love that about you 💖";
-            quizInput.style.borderColor = '#ff69b4';
-            createPetalBurst();
-            setTimeout(() => {
-                goToPage(3);
-            }, 1500);
-        }
-    });
-
-    revealGalleryBtn.addEventListener('click', () => {
-        galleryPrompt.style.display = 'none';
-        galleryWrapper.classList.remove('hidden');
-        galleryWrapper.classList.add('flex');
-
-        const images = galleryContainer.querySelectorAll('img');
-        images.forEach((img, index) => {
-            img.style.animation = `burst-in 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards`;
-            img.style.animationDelay = `${index * 100}ms`;
+            }
+            goToPage(1); // Move to quiz page
         });
-    });
 
-    nextToFinalBtn.addEventListener('click', () => {
-        goToPage(4);
-    });
-
-    restartBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            bgMusic.pause();
-            bgMusic.currentTime = 0;
-            voiceMessage.pause();
-            voiceMessage.currentTime = 0;
+        // Restart button
+        const restartBtn = document.querySelector('.restart-btn');
+        restartBtn.addEventListener('click', () => {
             goToPage(0);
         });
-    });
-
-    // --- Final Page Envelope Listener ---
-    envelope.addEventListener('click', () => {
-        if (isLetterOpened) return;
-        isLetterOpened = true;
-
-        envelope.classList.add('open');
-        
-        // Timeout to allow envelope flap to open before letter floats
-        setTimeout(() => {
-            letter.classList.add('visible');
-        }, 400); // Reduced delay for a quicker reveal
-    });
-});
-</script>
-
+    </script>
 </body>
 </html>
-
-
-
-
-
